@@ -94,6 +94,7 @@ public class calculator01 extends JFrame {
                 cal_text.setText("" + result);
                 num = "";
             }
+
             else if(text.equals("+/-")) {       //양수, 음수
                 String temp = cal_text.getText();
                 if (temp.equals("0.")) {
@@ -106,6 +107,13 @@ public class calculator01 extends JFrame {
                     else {
                         cal_text.setText(temp.substring(1));
                     }
+                }
+            }
+            else if (text.equals("%")) { // % 버튼 기능
+                String temp = cal_text.getText();
+                if (!temp.isEmpty()) {
+                    double percentage = Double.parseDouble(temp) / 100;
+                    cal_text.setText(String.valueOf(percentage));
                 }
             }
             else if(text.equals("+") || text.equals("-") || text.equals("×") || text.equals("÷")) {
