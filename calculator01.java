@@ -46,6 +46,8 @@ public class calculator01 extends JFrame {
         cal_text.setHorizontalAlignment(JTextField.RIGHT);
 
         Font font = new Font("Arial", Font.BOLD, 30); // 글자 크기 설정
+        Font font2 = new Font("Arial", Font.BOLD, 10);
+
         cal_text.setFont(font);
         cal_text.setEditable(false);
 
@@ -171,7 +173,7 @@ public class calculator01 extends JFrame {
                 mode = "div";
             }
             else {
-                if ((mode.equals("mul") || mode.equals("div")) && !s.equals("+") && !s.equals("-") && !s.equals("×") && s.equals("÷")) {
+                if ((mode.equals("mul") || mode.equals("div")) && !s.equals("+") && !s.equals("-") && !s.equals("×") && !s.equals("÷")) {
                     Double one = Double.parseDouble(calequre.get(i - 2));
                     Double two = Double.parseDouble(calequre.get(i));
                     Double result = 0.0;
@@ -185,13 +187,13 @@ public class calculator01 extends JFrame {
                     calequre.add(i + 1, Double.toString(result));
 
                     for(int j = 0; j < 3; j++){
-                        calequre.remove(i-2);
+                        calequre.remove(i - 2);
                     }
 
                     i -= 2;
                 }
             }
-        }
+        }   // 곱셈, 나눗셈 먼저 계산
 
         for(String s : calequre) {
             if (s.equals("+")) {
@@ -214,7 +216,7 @@ public class calculator01 extends JFrame {
                     prev = current;
                 }
             }
-            prev = Math.round(prev * 100000) / 100000.0;
+            prev = Math.round(prev * 100000) / 100000.0; // 소수 여섯번째 자리에서 반올림
         }
         return prev;        // 값 반환
 
