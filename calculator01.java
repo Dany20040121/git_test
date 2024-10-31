@@ -144,6 +144,8 @@ public class calculator01 extends JFrame {
         }
         calequre.add(num); //반복문 끝나고 남아있는 숫자값 추가
         calequre.remove(""); // 처음에 -가 있음 에러발생, ""을 제거
+        calequre.add(0, "0");
+        calequre.add(1, "+");
     }
 
     public double calculate(String inputText) {             // 계산 기능
