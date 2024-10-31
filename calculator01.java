@@ -13,8 +13,8 @@ public class calculator01 extends JFrame {
 
     String button_names[] = {"C","✏","%","÷",
             "7","8","9","×",
-            "4","5","6","－",
-            "1","2","3","＋",
+            "4","5","6","-",
+            "1","2","3","+",
             "+/-","0",".","="};
 
     ArrayList<String> calequre = new ArrayList<String>();
@@ -45,7 +45,7 @@ public class calculator01 extends JFrame {
         cal_text = new JTextField("0");
         cal_text.setHorizontalAlignment(JTextField.RIGHT);
 
-        Font font = new Font("아무거나", Font.BOLD, 30); // 글자 크기 설정
+        Font font = new Font("Arial", Font.BOLD, 30); // 글자 크기 설정
         cal_text.setFont(font);
         cal_text.setEditable(false);
 
@@ -92,13 +92,24 @@ public class calculator01 extends JFrame {
                 num = "";
             }
             else if(text.equals("+/-")) {
-
+                String temp = cal_text.getText();
+                if (temp.equals("0.")) {
+                    return;
+                }
+                else {
+                    if (temp.charAt(0) != '-') {
+                        cal_text.setText('-' + temp);
+                    }
+                    else {
+                        cal_text.setText(temp.substring(1));
+                    }
+                }
             }
-            else if(text.equals("＋") || text.equals("－") || text.equals("×") || text.equals("÷")) {
-                if (cal_text.getText().equals("") && text.equals("－")) {
+            else if(text.equals("+") || text.equals("-") || text.equals("×") || text.equals("÷")) {
+                if (cal_text.getText().equals("") && text.equals("-")) {
                     cal_text.setText(cal_text.getText() + e.getActionCommand());
 
-                } else if (!cal_text.getText().equals("") && !prev_operation.equals("＋") && !prev_operation.equals("－") && !prev_operation.equals("×") && !prev_operation.equals("÷")) {
+                } else if (!cal_text.getText().equals("") && !prev_operation.equals("+") && !prev_operation.equals("-") && !prev_operation.equals("×") && !prev_operation.equals("÷")) {
                     cal_text.setText(cal_text.getText() + e.getActionCommand());
                 }
             }
@@ -111,6 +122,7 @@ public class calculator01 extends JFrame {
                 }
 
             }
+            prev_operation = e.getActionCommand(); //마지막으로 누른 버튼 기억
         }
     }
 
@@ -120,7 +132,7 @@ public class calculator01 extends JFrame {
         for (int i = 0; i < inputText.length(); i++) {  // 계산식 글자를 하나하나 거처감
             char ch = inputText.charAt(i);
 
-            if (ch == '－' || ch == '＋'|| ch == '×' || ch == '÷'){
+            if (ch == '-' || ch == '+'|| ch == '×' || ch == '÷'){
                 calequre.add(num);
                 num = ""; // num 초기화
                 calequre.add(ch + ""); // 연산기호를 ArrayList에 추가
@@ -140,10 +152,10 @@ public class calculator01 extends JFrame {
         String mode = "";           // 현제 연산 모드를 저장해 덧, 뺄, 곱, 나눗셈 구분
 
         for (String s : calequre) {
-            if (s.equals("＋")) {
+            if (s.equals("+")) {
                 mode = "add";
             }
-            else if (s.equals("－")) {
+            else if (s.equals("-")) {
                 mode = "min";
             }
             else if (s.equals("×")) {
@@ -195,6 +207,6 @@ public class calculator01 extends JFrame {
     }
 
     public static void main(String[] args) {
-        new calculator05();
+        new calculator01();
     }
 }
