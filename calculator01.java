@@ -68,14 +68,15 @@ public class calculator01 extends JFrame {
         }
         this.add(panel, BorderLayout.CENTER);
     }
-
+//-------------------------------------------------------------------------------------------------------
     class ButtonListener implements ActionListener {            // 버튼 누르면 글자 출력
         public void actionPerformed(ActionEvent e) {
             String text = e.getActionCommand();
-            if(text.equals("C")) {
+
+            if(text.equals("C")) {      // 전부 지우기
                 cal_text.setText("");
             }
-            else if(text.equals("✏")) {
+            else if(text.equals("✏")) {     //지우기
                 int t = cal_text.getText().length();
                 if(t == 0 || cal_text.getText().equals("0")) { // cal_text가 0이거나 없으면 0 으로 씀
                     cal_text.setText("0");
@@ -86,12 +87,12 @@ public class calculator01 extends JFrame {
                     cal_text.setText(back);
                 }
             }
-            else if(text.equals("=")) {
+            else if(text.equals("=")) {     // 계산
                 String result = Double.toString(calculate(cal_text.getText()));
                 cal_text.setText("" + result);
                 num = "";
             }
-            else if(text.equals("+/-")) {
+            else if(text.equals("+/-")) {       //양수, 음수
                 String temp = cal_text.getText();
                 if (temp.equals("0.")) {
                     return;
@@ -125,7 +126,7 @@ public class calculator01 extends JFrame {
             prev_operation = e.getActionCommand(); //마지막으로 누른 버튼 기억
         }
     }
-
+// ------------------------------------------------------------------------------------
     void fullTextParseing(String inputText) {       // inputText에서 수식을 숫자와 연산 기호로 나누어 calequare 리스트에 순서대로 정리 즉 문자열과 수식 분리
         calequre.clear();       // 저장된 내용 있다면 삭제
 
@@ -142,16 +143,19 @@ public class calculator01 extends JFrame {
             }
         }
         calequre.add(num); //반복문 끝나고 남아있는 숫자값 추가
+        calequre.remove(""); // 처음에 -가 있음 에러발생, ""을 제거
     }
 
-    public double calculate(String inputText) {
+    public double calculate(String inputText) {             // 계산 기능
         fullTextParseing(inputText);
 
         double prev = 0;            // 계산 결과 저장, 초기값 = 0
         double current = 0;         // 현재 계산 중인 숫자를 저장
         String mode = "";           // 현제 연산 모드를 저장해 덧, 뺄, 곱, 나눗셈 구분
 
-        for (String s : calequre) {
+        for (int i = 0; i < calequre.size(); i++) { // 연산자 우선순위 적용
+            String s = calequre.get(i);
+
             if (s.equals("+")) {
                 mode = "add";
             }
@@ -165,26 +169,52 @@ public class calculator01 extends JFrame {
                 mode = "div";
             }
             else {
-                current = Double.parseDouble(s);
+                if ((mode.equals("mul") || mode.equals("div")) && !s.equals("+") && !s.equals("-") && !s.equals("×") && s.equals("÷")) {
+                    Double one = Double.parseDouble(calequre.get(i - 2));
+                    Double two = Double.parseDouble(calequre.get(i));
+                    Double result = 0.0;
 
-                if (mode.equals("add")) {               // s가 숫자일 경우 문자열을 Double로 변환해 current에 저장, mode 값에 따라 연산 수행
-                    prev = current + prev;
-                }
-                else if (mode.equals("min")) {
-                    prev = current - prev;
-                }
-                else if (mode.equals("mul")) {
-                    prev = current * prev;
-                }
-                else if (mode.equals("div")) {
-                    prev = current / prev;
-                }
-                else {
-                    prev = current;         // 초기값 prev가 0 일때 처음 값을 그대로 prev에 할당
+                    if (mode.equals("mul")) {
+                        result = one * two;
+                    }
+                    else if (mode.equals("div")) {
+                        result = one / two;
+                    }
+                    calequre.add(i + 1, Double.toString(result));
+
+                    for(int j = 0; j < 3; j++){
+                        calequre.remove(i-2);
+                    }
+
+                    i -= 2;
                 }
             }
         }
-        return prev;
+
+        for(String s : calequre) {
+            if (s.equals("+")) {
+                mode = "add";
+            }
+            else if (s.equals("-")) {
+                mode = "min";
+            }
+
+            else {
+                current = Double.parseDouble(s);
+
+                if (mode.equals("add")) {
+                    prev += current;
+                }
+                else if (mode.equals("min")) {
+                    prev -= current;
+                }
+                else {
+                    prev = current;
+                }
+            }
+            prev = Math.round(prev * 100000) / 100000.0;
+        }
+        return prev;        // 값 반환
 
     }
 
