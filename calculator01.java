@@ -2,6 +2,7 @@ package 계산기_만들기;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,8 +53,7 @@ public class calculator01 extends JFrame {
         cal_text.setHorizontalAlignment(JTextField.RIGHT);
         cal_text.setBackground(new Color(0xF3F3F3));
 
-        Font font = new Font("Arial", Font.BOLD, 30); // 글자 크기 설정
-        Font font2 = new Font("Arial", Font.BOLD, 10);
+        Font font = new Font("Arial", Font.ITALIC, 40); // 글자 크기 설정
 
         cal_text.setFont(font);
         cal_text.setEditable(false);
@@ -66,7 +66,7 @@ public class calculator01 extends JFrame {
     }
     void showCenter() {
         panel = new JPanel();
-        panel.setLayout(new GridLayout(5,4,10,10));
+        panel.setLayout(new GridLayout(5,4,3,3));
         panel.setBackground(new Color(0xF3F3F3));
         Font font = new Font("Arial", Font.BOLD, 15);
         JButton buttons[] = new JButton[button_names.length];
@@ -76,6 +76,7 @@ public class calculator01 extends JFrame {
             panel.add(buttons[i]);
             buttons[i].addActionListener(new ButtonListener());
             buttons[i].setFont(font);
+            buttons[i].setBorder(new LineBorder(new Color(0xE1E1E1), 3, true));
             if(0 <= i && i <= 3) {
                 buttons[i].setBackground(new Color(0xF9F9F9));
             }
