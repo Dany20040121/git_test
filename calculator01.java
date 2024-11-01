@@ -11,7 +11,7 @@ public class calculator01 extends JFrame {
 
     JPanel panel;
 
-    String button_names[] = {"C","✏","%","÷",
+    String button_names[] = {"C","←","%","÷",
             "7","8","9","×",
             "4","5","6","-",
             "1","2","3","+",
@@ -61,12 +61,26 @@ public class calculator01 extends JFrame {
         panel = new JPanel();
         panel.setLayout(new GridLayout(5,4,10,10));
         panel.setBackground(new Color(0xF3F3F3));
+        Font font = new Font("Arial", Font.BOLD, 15);
         JButton buttons[] = new JButton[button_names.length];
 
         for(int i = 0; i < buttons.length; i++) {
             buttons[i] = new JButton(button_names[i]);
             panel.add(buttons[i]);
             buttons[i].addActionListener(new ButtonListener());
+            buttons[i].setFont(font);
+            if(0 <= i && i <= 3) {
+                buttons[i].setBackground(new Color(0xF9F9F9));
+            }
+            else if(i == 7 || i == 11 || i == 15){
+                buttons[i].setBackground(new Color(0xF9F9F9));
+            } else if (i == 19) {
+                buttons[i].setBackground(new Color(0xB10247));
+                buttons[i].setForeground(new Color(0xF3F3F3));
+            }
+            else{
+                buttons[i].setBackground(new Color(0xFFFFFF));
+            }
         }
         this.add(panel, BorderLayout.CENTER);
     }
@@ -78,7 +92,7 @@ public class calculator01 extends JFrame {
             if(text.equals("C")) {      // 전부 지우기
                 cal_text.setText("");
             }
-            else if(text.equals("✏")) {     //지우기
+            else if(text.equals("←")) {     //지우기
                 int t = cal_text.getText().length();
                 if(t == 0 || cal_text.getText().equals("0")) { // cal_text가 0이거나 없으면 0 으로 씀
                     cal_text.setText("0");
