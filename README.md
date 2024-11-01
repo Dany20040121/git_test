@@ -31,4 +31,24 @@ Java Swing을 사용하여 구현한 GUI 계산기 애플리케이션입니다. 
   - 기본적으로 `0xF9F9F9` 배경색을 가지며, 연산 기호 및 특별한 기능 버튼에는 추가 색상을 적용하여 구분했습니다.
 
 ## 실행 화면
+- **초기 화면**
 
+![스크린샷 2024-11-01 212031](https://github.com/user-attachments/assets/9a26f18c-3505-4fc8-a92c-758b04bc4c3d)
+- **단순 연산 이전**
+
+ ![스크린샷 2024-11-01 212529](https://github.com/user-attachments/assets/cc56c043-ac6f-480b-bac4-7d617c492c32)
+
+- **단순 연산 이후**
+
+![스크린샷 2024-11-01 212539](https://github.com/user-attachments/assets/c269c8b1-2576-4d2f-9b67-89bd355298be)
+
+
+- **우선 순위 연산자**
+
+![스크린샷 2024-11-01 212559](https://github.com/user-attachments/assets/738fb152-2be7-462e-ac05-5fa45ce3a864)
+![스크린샷 2024-11-01 212610](https://github.com/user-attachments/assets/163d7dbb-2c49-4d24-add1-1da897d950af)
+
+- **음수 연산**
+
+![스크린샷 2024-11-01 213848](https://github.com/user-attachments/assets/107180d0-7fd2-491e-9566-c0d2ae8c1c45)
+![스크린샷 2024-11-01 212636](https://github.com/user-attachments/assets/30619366-d6fe-4e10-ab47-d8e5c1925c9e)
