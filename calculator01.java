@@ -8,21 +8,43 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * 기본적인 사칙연산을 포함한 GUI 계산기 애플리케이션.
+ * 이 클래스는 더하기, 빼기, 곱하기, 나누기와 같은 기본적인 수학 연산을 수행하며,
+ * 백스페이스, 화면 지우기, 퍼센트 계산 등의 기능을 제공합니다.
+ *
+ * 버튼을 통한 입력을 지원하며, 계산 결과는 상단의 JTextField에 표시됩니다.
+ */
+
 public class calculator01 extends JFrame {
+    /**
+     * 현재 계산 텍스트와 결과를 표시하는 JTextField입니다.
+     */
     JTextField cal_text;
 
     JPanel panel;
-
+    /**
+     * 계산기의 기능을 위한 버튼 라벨 배열입니다.
+     */
     String button_names[] = {"C","←","%","÷",
             "7","8","9","×",
             "4","5","6","-",
             "1","2","3","+",
             "+/-","0",".","="};
 
+    /**
+     * 계산 식의 각 요소(숫자와 연산 기호)를 저장하는 리스트입니다.
+     */
     ArrayList<String> calequre = new ArrayList<String>();
 
+    /**
+     * 숫자를 임시로 저장하는 문자열입니다.
+     */
     String num = "";
 
+    /**
+     * 마지막으로 사용자가 누른 연산을 저장하는 문자열입니다.
+     */
     String prev_operation = "";
 
     public calculator01() {
@@ -41,6 +63,10 @@ public class calculator01 extends JFrame {
 
         setVisible(true);
     }
+    /**
+     * 계산기 상단에 JTextField를 표시하는 메서드로
+     * 텍스트 필드의 글자 크기와 배경색, 정렬 등을 설정합니다.
+     */
     void showNorth() {
         panel = new JPanel();
         panel.setBackground(new Color(0xF3F3F3));
@@ -64,6 +90,10 @@ public class calculator01 extends JFrame {
         add(panel, BorderLayout.NORTH);
 
     }
+    /**
+     * 계산기의 중앙에 배치될 숫자와 연산 버튼을 표시하는 메서드입니다.
+     * 그리드 레이아웃을 사용하여 버튼을 배치하고, 각 버튼에 기능을 추가합니다.
+     */
     void showCenter() {
         panel = new JPanel();
         panel.setLayout(new GridLayout(5,4,3,3));
@@ -92,7 +122,11 @@ public class calculator01 extends JFrame {
         }
         this.add(panel, BorderLayout.CENTER);
     }
-//-------------------------------------------------------------------------------------------------------
+
+    /**
+     * 계산기 버튼의 액션을 처리하는 내부 클래스입니다.
+     * 버튼 클릭 시 조작하고 JTextField에 반영하는 기능을 수행합니다.
+     */
     class ButtonListener implements ActionListener {            // 버튼 누르면 글자 출력
         public void actionPerformed(ActionEvent e) {
             String text = e.getActionCommand();
@@ -158,7 +192,13 @@ public class calculator01 extends JFrame {
             prev_operation = e.getActionCommand(); //마지막으로 누른 버튼 기억
         }
     }
-// ------------------------------------------------------------------------------------
+
+    /**
+     * 입력된 계산 식을 숫자와 연산 기호로 분리하여
+     * `calequre` 리스트에 순서대로 정리하는 메서드입니다.
+     *
+     * @param inputText 계산식 문자열
+     */
     void fullTextParseing(String inputText) {       // inputText에서 수식을 숫자와 연산 기호로 나누어 calequare 리스트에 순서대로 정리 즉 문자열과 수식 분리
         calequre.clear();       // 저장된 내용 있다면 삭제
 
@@ -180,6 +220,13 @@ public class calculator01 extends JFrame {
         calequre.add(1, "+");
     }
 
+    /**
+     * 주어진 계산식 문자열을 계산하여 결과를 반환하는 메서드입니다.
+     * 곱셈과 나눗셈을 우선 처리한 후 덧셈과 뺄셈을 수행합니다.
+     *
+     * @param inputText 계산식 문자열
+     * @return 계산 결과
+     */
     public double calculate(String inputText) {             // 계산 기능
         fullTextParseing(inputText);
 
@@ -252,12 +299,15 @@ public class calculator01 extends JFrame {
 
     }
 
-    void showWest() {                                           // 이하는 배경 양옆 색깔 지정 및 버튼 띄우기
+    /**
+     * 이하는 배경 양옆 색깔 지정 및 버튼 띄우기
+     */
+    void showWest() {
         panel = new JPanel();
         panel.setBackground(new Color(0xF3F3F3));
         add(panel, BorderLayout.WEST);
     }
-    
+
     void showEast() {
         panel = new JPanel();
         panel.setBackground(new Color(0xF3F3F3));
@@ -270,6 +320,18 @@ public class calculator01 extends JFrame {
         add(panel, BorderLayout.SOUTH);
     }
 
+    /**
+     * 인용코드
+     *
+     * @see <a herf="https://shgdx.tistory.com/3">JPanel 사용하는 아이디어 제공</a>
+     * @see <a herf="https://beautifulkim.tistory.com/309">"setPreferredSize" 알려줌</a>
+     * @see <a herf="https://code-review.tistory.com/entry/%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9-%EC%9E%90%EB%B0%94%EB%A1%9C-%EA%B3%84%EC%82%B0%EA%B8%B0-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0">자바 계산기 코딩 짜기에 전반적인 기초를 알려줌</a>
+     * @see <a herf="https://limunosekai.github.io/java/2021/01/04/java-day-20/">배경 정하는거 도와줌</a>
+     * @see <a herf="https://m.blog.naver.com/10hsb04/221607286384">글자 크기 설정 도와줌</a>
+     * @see <a herf="https://itdeveloper.tistory.com/25">backspace 알려줌</a>
+     * @see <a herf="https://chatgpt.com/g/g-FvT4UOsoA-caesgpt/c/6723b1cf-fea0-800a-b0b8-c30c201f03a6">코드 해석 및 보완</a>
+     *
+     */
     public static void main(String[] args) {
         new calculator01();
     }
