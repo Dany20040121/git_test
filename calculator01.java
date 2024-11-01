@@ -1,6 +1,7 @@
 package 계산기_만들기;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,8 +43,14 @@ public class calculator01 extends JFrame {
     void showNorth() {
         panel = new JPanel();
         panel.setBackground(new Color(0xF3F3F3));
-        cal_text = new JTextField("0");
+        cal_text = new JTextField("0"){
+
+            public void setBorder(Border border) { // JTextField 태두리 없애기
+
+            }
+        };
         cal_text.setHorizontalAlignment(JTextField.RIGHT);
+        cal_text.setBackground(new Color(0xF3F3F3));
 
         Font font = new Font("Arial", Font.BOLD, 30); // 글자 크기 설정
         Font font2 = new Font("Arial", Font.BOLD, 10);
