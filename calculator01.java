@@ -28,7 +28,7 @@ public class calculator01 extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(335, 538);
         Container c = getContentPane();
-        c.setBackground(Color.YELLOW);
+        c.setBackground(new Color(0xF3F3F3));
         c.setLayout(new BorderLayout(5, 5));
 
         showNorth();
@@ -41,7 +41,7 @@ public class calculator01 extends JFrame {
     }
     void showNorth() {
         panel = new JPanel();
-        panel.setBackground(Color.YELLOW);
+        panel.setBackground(new Color(0xF3F3F3));
         cal_text = new JTextField("0");
         cal_text.setHorizontalAlignment(JTextField.RIGHT);
 
@@ -60,7 +60,7 @@ public class calculator01 extends JFrame {
     void showCenter() {
         panel = new JPanel();
         panel.setLayout(new GridLayout(5,4,10,10));
-        panel.setBackground(Color.YELLOW);
+        panel.setBackground(new Color(0xF3F3F3));
         JButton buttons[] = new JButton[button_names.length];
 
         for(int i = 0; i < buttons.length; i++) {
@@ -232,19 +232,19 @@ public class calculator01 extends JFrame {
 
     void showWest() {                                           // 이하는 배경 양옆 색깔 지정 및 버튼 띄우기
         panel = new JPanel();
-        panel.setBackground(Color.YELLOW);
+        panel.setBackground(new Color(0xF3F3F3));
         add(panel, BorderLayout.WEST);
     }
     
     void showEast() {
         panel = new JPanel();
-        panel.setBackground(Color.YELLOW);
+        panel.setBackground(new Color(0xF3F3F3));
         add(panel, BorderLayout.EAST);
     }
 
     void showSouth() {
         panel = new JPanel();
-        panel.setBackground(Color.YELLOW);
+        panel.setBackground(new Color(0xF3F3F3));
         add(panel, BorderLayout.SOUTH);
     }
 
